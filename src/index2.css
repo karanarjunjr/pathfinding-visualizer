@@ -1,0 +1,187 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* height: 100vh; */
+  background-color: #192227;
+  overflow-y: none;
+}
+
+i {
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  margin: 0;
+  padding-top: 20px;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.node {
+  width: 1.55vw;
+  height: 1.55vw;
+  border: 0.01em solid #141b1e;
+
+  background-color: rgba(0, 0, 0, 0);
+  line-height: 0.25em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.path {
+  background-color: #faf900;
+}
+
+.wall {
+  /* background-color: #f74e89; */
+  animation-name: animWall;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.nodeInsideArea {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visited {
+  animation-name: animVisited;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+.path {
+  animation-name: animPath;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.fontAwesome {
+  width: 85%;
+  height: 85%;
+}
+
+@keyframes animWall {
+  0% {
+    transform: scale(0.3);
+    background-color: #86002d;
+    border-radius: 100%;
+  }
+
+  10% {
+    background-color: #bd0055;
+  }
+
+  50% {
+    transform: scale(1.5);
+    background-color: #f62681;
+  }
+
+  100% {
+    background-color: #f74e89;
+  }
+}
+@keyframes animPath {
+  0% {
+    transform: scale(0.5);
+    /* background-color: ffca28; */
+    background-color: #ffca28;
+    border-radius: 100%;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: #fffe6a;
+  }
+}
+@keyframes animVisited {
+  0% {
+    clip-path: circle(25% at 50% 50%);
+    border-radius: 100%;
+    background-color: rgb(255, 255, 134);
+  }
+
+  10% {
+    clip-path: circle(33% at 50% 50%);
+    border-radius: 100%;
+    background-color: #309af0;
+  }
+
+  50% {
+    background-color: #32d5fa;
+  }
+
+  75% {
+    background-color: #32fab1;
+  }
+
+  100% {
+    clip-path: circle(100% at 50% 50%);
+
+    background-color: #29e9d9;
+  }
+}
+
+.row {
+  display: flex;
+  float: left;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.legend {
+  padding: 3% 0;
+  display: flex;
+}
+
+.legendItem {
+  display: flex;
+  margin-left: 1.5em;
+  align-items: center;
+}
+
+.legendItemLeft {
+  margin-right: 0.5em;
+}
+
+.legendImage {
+  width: 1.55vw;
+  height: 1.55vw;
+  /* border: 2px solid #141b1e; */
+}
