@@ -12,11 +12,25 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import RouteIcon from "@mui/icons-material/Route";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const buttons = ["Visualize", "Clea Path", "Clear Grid"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = (props) => {
+  const handleChange = (event, value) => {
+    props.setAlgorithm(value);
+  };
+
   return (
     <AppBar
       onMouseUp={props.handleMouse}
@@ -82,16 +96,33 @@ const Navbar = (props) => {
             >
               Clear Path
             </Button>
+
+            <ThemeProvider theme={darkTheme}>
+              <ToggleButtonGroup
+                color="primary"
+                value={props.algorithm}
+                exclusive
+                onChange={handleChange}
+                size="small"
+                sx={{ my: 2, ml: 3 }}
+              >
+                <ToggleButton value="bfs">BFS</ToggleButton>
+                <ToggleButton value="dfs">DFS</ToggleButton>
+                <ToggleButton value="dijkstra">Dijkstra's</ToggleButton>
+              </ToggleButtonGroup>
+            </ThemeProvider>
+
             <Button
               color="error"
               variant="contained"
+              // size="small"
               onClick={props.visualize}
               sx={{
                 my: 2,
                 color: "white",
                 display: "block",
                 boxShadow: 0,
-                ml: 1.5,
+                ml: 3,
               }}
             >
               Visualize

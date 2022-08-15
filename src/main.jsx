@@ -2,8 +2,10 @@ import Node from "./node";
 import { useEffect, useState } from "react";
 import React from "react";
 import bfs from "./algorithms/bfs";
+import dfs from "./algorithms/dfs";
 import Navbar from "./navbar";
 import Legend from "./legend";
+import dijkstra from "./algorithms/dijkstra";
 
 const Main = (props) => {
   const [grid, setGrid] = useState([]);
@@ -11,6 +13,7 @@ const Main = (props) => {
   const [start_j, setStart_j] = useState(15);
   const [end_i, setEnd_i] = useState(9);
   const [end_j, setEnd_j] = useState(40);
+  const [algorithm, setAlgorithm] = useState("bfs");
 
   useEffect(() => {
     setGrid(createGrid());
@@ -38,6 +41,17 @@ const Main = (props) => {
     }
 
     return grid;
+  };
+
+  const bfsHelper = (i, j, grid) => {
+    return bfs(i, j, grid);
+  };
+  const dfsHelper = (i, j, grid) => {
+    return dfs(i, j, grid);
+  };
+  const dijkstraHelper = (i, j, grid) => {
+    console.log("called");
+    return dijkstra(i, j, grid);
   };
 
   const handleMouseDown = (i, j) => {
@@ -176,7 +190,10 @@ const Main = (props) => {
       togglePathGrid(start_i, start_j);
       return;
     }
-    let { temp, par } = bfs(start_i, start_j, grid);
+
+    let { temp, par } = eval(algorithm + "Helper")(start_i, start_j, grid);
+    // let { temp, par } = bfs(start_i, start_j, grid);
+
     document.body.style["pointer-events"] = "none";
     let flag = false;
     var visWait;
@@ -214,14 +231,14 @@ const Main = (props) => {
         for (let i = path.length - 1; i >= 0; i--) {
           setTimeout(() => {
             togglePathGrid(path[i][0], path[i][1]);
-          }, 50 * (path.length - i));
+          }, 20 * (path.length - i));
         }
       }, 10 * (visWait + 100));
     }
 
     setTimeout(() => {
       document.body.style["pointer-events"] = "auto";
-    }, 10 * (visWait + 100) + (path.length + 10) * 50);
+    }, 10 * (visWait + 100) + (path.length + 10) * 20);
   };
 
   const clearPath = () => {
@@ -281,6 +298,8 @@ const Main = (props) => {
         clearPath={clearPath}
         clearGrid={clearGrid}
         onMouseUp={handleMouseUp}
+        algorithm={algorithm}
+        setAlgorithm={setAlgorithm}
       />
       <Legend onMouseUp={handleMouseUp} />
       <div className="main">
